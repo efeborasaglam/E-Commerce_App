@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 
 const AddDoctor = () => {
-  const [docImg, setDocImg] = useState(false);
+  const [docImgs, setDocImgs] = useState([]); // Array von File-Objekten
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,17 +19,30 @@ const AddDoctor = () => {
 
   const { backendUrl, aToken } = useContext(AdminContext);
 
+  const onImagesChange = (e) => {
+    const newFiles = Array.from(e.target.files);
+    setDocImgs((prev) => [...prev, ...newFiles]);
+    // Input zurücksetzen, damit man dieselbe Datei erneut auswählen kann
+    e.target.value = "";
+  };
+
+  const removeImage = (index) => {
+    setDocImgs((prev) => prev.filter((_, i) => i !== index));
+  };
+
   const onSubmitHandler = async (event) => {
     event.preventDefault();
 
     try {
-      if (!docImg) {
-        return toast.error("Please upload doctor image");
+      if (docImgs.length === 0) {
+        return toast.error("Please upload at least one doctor image");
       }
 
       const formData = new FormData();
 
-      formData.append("image", docImg);
+      docImgs.forEach((file) => {
+        formData.append("images", file);
+      });
       formData.append("name", name);
       formData.append("email", email);
       formData.append("password", password);
@@ -43,7 +56,6 @@ const AddDoctor = () => {
         JSON.stringify({ line1: address1, line2: address2 }),
       );
 
-      //   console.log formdata
       formData.forEach((value, key) => {
         console.log(`${key} : ${value}`);
       });
@@ -57,7 +69,7 @@ const AddDoctor = () => {
       );
       if (data.success) {
         toast.success(data.message);
-        setDocImg(false);
+        setDocImgs([]);
         setName("");
         setPassword("");
         setEmail("");
@@ -83,23 +95,56 @@ const AddDoctor = () => {
           "bg-white px-8 py-8 border rounded w-full max-w-4xl max-h-[80vh] overflow-y-scroll"
         }
       >
-        <div className={"flex items-center gap-4 mb-8 text-gray-500"}>
-          <label htmlFor={"doc-img"}>
-            <img
-              className={"w-16 bg-gray-100 rounded-full cursor-pointer"}
-              src={docImg ? URL.createObjectURL(docImg) : assets.upload_area}
-              alt={"img"}
+        <div className={"flex flex-col gap-4 mb-8 text-gray-500"}>
+          <div className={"flex items-center gap-4"}>
+            <label htmlFor={"doc-img"}>
+              <div
+                className={
+                  "w-16 h-16 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer overflow-hidden"
+                }
+              >
+                <img
+                  className={"w-8"}
+                  src={assets.upload_area}
+                  alt={"upload"}
+                />
+              </div>
+            </label>
+            <input
+              onChange={onImagesChange}
+              type={"file"}
+              id={"doc-img"}
+              accept={"image/*"}
+              multiple
+              hidden
             />
-          </label>
-          <input
-            onChange={(e) => setDocImg(e.target.files[0])}
-            type={"file"}
-            id={"doc-img"}
-            hidden
-          />
-          <p>
-            Upload Doctor <br /> Picture
-          </p>
+            <p>
+              Upload Doctor <br /> Pictures ({docImgs.length} ausgewählt)
+            </p>
+          </div>
+
+          {docImgs.length > 0 && (
+            <div className={"flex flex-wrap gap-3"}>
+              {docImgs.map((file, index) => (
+                <div key={index} className={"relative w-20 h-20"}>
+                  <img
+                    className={"w-20 h-20 object-cover rounded border"}
+                    src={URL.createObjectURL(file)}
+                    alt={`doctor-img-${index}`}
+                  />
+                  <button
+                    type={"button"}
+                    onClick={() => removeImage(index)}
+                    className={
+                      "absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center"
+                    }
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div
           className={

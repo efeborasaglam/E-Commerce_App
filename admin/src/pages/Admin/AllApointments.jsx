@@ -24,7 +24,7 @@ const AllApointments = () => {
       >
         <div
           className={
-            "hidden sm:grid grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] grid-flow-col py-3 px-6 border-b"
+            "hidden sm:grid grid-cols-[0.5fr_2.5fr_1fr_2.5fr_2.5fr_2fr_1fr_1fr] grid-flow-col py-3 px-6 border-b"
           }
         >
           <p>#</p>
@@ -32,13 +32,14 @@ const AllApointments = () => {
           <p>Age</p>
           <p>Date & Time</p>
           <p>Doctor</p>
+          <p>Address</p>
           <p>Fees</p>
           <p>Action</p>
         </div>
         {appointments.map((item, index) => (
           <div
             className={
-              "flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_3fr_1fr_3fr_3fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50"
+              "flex flex-wrap justify-between max-sm:gap-2 sm:grid sm:grid-cols-[0.5fr_2.5fr_1fr_2.5fr_2.5fr_2fr_1fr_1fr] items-center text-gray-500 py-3 px-6 border-b hover:bg-gray-50"
             }
             key={index}
           >
@@ -63,6 +64,12 @@ const AllApointments = () => {
               />
               <p>{item.docData.name}</p>
             </div>
+            <p className={"max-sm:hidden text-xs"}>
+              {item.userData.address?.line1}
+              {item.userData.address?.line2
+                ? `, ${item.userData.address.line2}`
+                : ""}
+            </p>
             <p>
               {currency} {item.amount}
             </p>
