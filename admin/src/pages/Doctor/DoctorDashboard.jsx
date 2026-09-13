@@ -12,13 +12,26 @@ const DoctorDashboard = () => {
     completeAppointment,
     cancelAppointment,
   } = useContext(DoctorContext);
-  const { slotDateFormate, currency } = useContext(AppContext);
+  const { currency } = useContext(AppContext);
 
   useEffect(() => {
     if (dToken) {
       getDashData();
     }
   }, [dToken]);
+
+  // Hilfsfunktion zum Formatieren des Bestelldatums inkl. Uhrzeit
+  const formatDate = (timestamp) => {
+    if (!timestamp) return "";
+    const date = new Date(timestamp);
+    return date.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
 
   return (
     dashData && (
@@ -56,7 +69,7 @@ const DoctorDashboard = () => {
               <p className={"text-xl font-semibold text-gray-600"}>
                 {dashData.appointments}
               </p>
-              <p className={"text-gray-400"}>Appointments</p>
+              <p className={"text-gray-400"}>Orders</p>
             </div>
           </div>
           <div
@@ -73,7 +86,7 @@ const DoctorDashboard = () => {
               <p className={"text-xl font-semibold text-gray-600"}>
                 {dashData.patients}
               </p>
-              <p className={"text-gray-400"}>Patients</p>
+              <p className={"text-gray-400"}>Customers</p>
             </div>
           </div>
         </div>
@@ -84,7 +97,7 @@ const DoctorDashboard = () => {
             }
           >
             <img src={assets.list_icon} alt={""} />
-            <p className={"font-semibold"}>Latest Bookings</p>
+            <p className={"font-semibold"}>Latest Orders</p>
           </div>
           <div className={"pt-4 border border-t-0"}>
             {dashData.latestAppointments.map((item, index) => (
@@ -97,14 +110,15 @@ const DoctorDashboard = () => {
                 <img
                   className={"rounded-full w-10"}
                   src={item.userData.image}
-                  alt={"doc image"}
+                  alt={"user image"}
                 />
                 <div className={"flex-1 text-sm"}>
                   <p className={"text-gray-800 font-medium"}>
                     {item.userData.name}
                   </p>
+                  {/* Hier wird nun das exakte Bestelldatum inkl. Uhrzeit ausgegeben */}
                   <p className={"text-gray-600"}>
-                    {slotDateFormate(item.slotDate)}
+                    {formatDate(item.date)}
                   </p>
                 </div>
                 {item.cancel ? (
@@ -139,4 +153,5 @@ const DoctorDashboard = () => {
     )
   );
 };
+
 export default DoctorDashboard;

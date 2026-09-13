@@ -20,6 +20,7 @@ const addDoctor = async (req, res) => {
       about,
       fees,
       address,
+      colors
     } = req.body;
     const imageFiles = req.files; // jetzt ein Array statt req.file
 
@@ -76,6 +77,7 @@ const addDoctor = async (req, res) => {
       fees,
       address: JSON.parse(address),
       date: Date.now(),
+      colors: colors ? JSON.parse(colors) : [],
     };
 
     const newDoctor = new doctorModel(doctorData);
@@ -150,17 +152,36 @@ const appointmentCancel = async (req, res) => {
 
     const { docId, slotDate, slotTime } = appointmentData;
 
-    const doctorData = await doctorModel.findById(docId);
+    // Bei Bestellungen (kein echter Termin) gibt es keinen Slot, der freigegeben werden müsste
+    if (slotDate !== "Not Applicable") {
+      const doctorData = await doctorModel.findById(docId);
+      let slots_booked = doctorData.slots_booked;
 
-    let slots_booked = doctorData.slots_booked;
-
-    slots_booked[slotDate] = slots_booked[slotDate].filter(
-      (e) => e !== slotTime,
-    );
-
-    await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+      if (slots_booked[slotDate]) {
+        slots_booked[slotDate] = slots_booked[slotDate].filter(
+          (e) => e !== slotTime,
+        );
+        await doctorModel.findByIdAndUpdate(docId, { slots_booked });
+      }
+    }
 
     res.json({ success: true, message: "Appointment Cancelled" });
+  } catch (e) {
+    console.log(e);
+    res.json({ success: false, message: e.message + "Something went wrong" });
+  }
+};
+
+// API for appointment completion (admin)
+const appointmentComplete = async (req, res) => {
+  try {
+    const { appointmentId } = req.body;
+
+    await appointmentModel.findByIdAndUpdate(appointmentId, {
+      isCompleted: true,
+    });
+
+    res.json({ success: true, message: "Appointment Completed" });
   } catch (e) {
     console.log(e);
     res.json({ success: false, message: e.message + "Something went wrong" });
@@ -188,11 +209,99 @@ const adminDashboard = async (req, res) => {
   }
 };
 
+// API to update a doctor (admin)
+const updateDoctor = async (req, res) => {
+  try {
+    const {
+      docId,
+      name,
+      speciality,
+      degree,
+      experience,
+      about,
+      fees,
+      address,
+      available,
+      existingImages,
+      colors
+    } = req.body;
+    const imageFiles = req.files;
+
+    if (!docId) {
+      return res.json({ success: false, message: "Doctor Id missing" });
+    }
+
+    if (
+      !name ||
+      !speciality ||
+      !degree ||
+      !experience ||
+      !about ||
+      !fees ||
+      !address
+    ) {
+      return res.json({ success: false, message: "Missing Details" });
+    }
+
+    // Bilder, die im Frontend behalten wurden
+    const keptImages = existingImages ? JSON.parse(existingImages) : [];
+
+    // Neue Bilder hochladen, falls welche mitgeschickt wurden
+    let newImageUrls = [];
+    if (imageFiles && imageFiles.length > 0) {
+      const uploadResults = await Promise.all(
+        imageFiles.map((file) =>
+          cloudinary.uploader.upload(file.path, {
+            resource_type: "image",
+            folder: "doctors",
+          }),
+        ),
+      );
+      newImageUrls = uploadResults.map((result) => result.secure_url);
+    }
+
+    const finalImages = [...keptImages, ...newImageUrls];
+
+    if (finalImages.length === 0) {
+      return res.json({
+        success: false,
+        message: "At least one image is required",
+      });
+    }
+
+    const updateData = {
+      name,
+      speciality,
+      degree,
+      experience,
+      about,
+      fees: Number(fees),
+      address: JSON.parse(address),
+      available: available === "true" || available === true,
+      images: finalImages,
+      image: finalImages[0], // Hauptbild bleibt das erste in der Reihenfolge
+      colors: colors ? JSON.parse(colors) : [],
+    };
+
+    await doctorModel.findByIdAndUpdate(docId, updateData);
+
+    res.json({ success: true, message: "Doctor updated" });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message + "Something went wrong",
+    });
+  }
+};
+
 export {
   addDoctor,
   loginAdmin,
   allDoctors,
   appointmentsAdmin,
   appointmentCancel,
+  appointmentComplete,
   adminDashboard,
+  updateDoctor
 };

@@ -282,6 +282,45 @@ const verifyStripe = async (req, res) => {
   }
 };
 
+// API to place an order
+const placeOrder = async (req, res) => {
+  try {
+    const { userId, docId, quantity, address } = req.body;
+
+    const productDataDoc = await doctorModel.findById(docId).select("-password");
+    const userDataDoc = await userModel.findById(userId).select("-password");
+
+    if (!productDataDoc) {
+      return res.json({ success: false, message: "Product not found" });
+    }
+
+    const productData = productDataDoc.toObject();
+    const userData = userDataDoc.toObject();
+
+    const orderData = {
+      userId,
+      docId,
+      userData,
+      docData: productData, // Speichert die Produktdaten im docData-Feld des Schemas
+      amount: productData.fees * quantity,
+      quantity,
+      address,
+      slotTime: "Not Applicable", // Füllt das Pflichtfeld, damit Mongoose nicht meckert
+      slotDate: "Not Applicable", // Füllt das Pflichtfeld, damit Mongoose nicht meckert
+      color: req.body.color, // <-- WICHTIG: Hier muss die Farbe mitgespeichert werden!
+      date: Date.now()
+    };
+
+    const newOrder = new appointmentModel(orderData);
+    await newOrder.save();
+
+    res.json({ success: true, message: "Order Placed Successfully" });
+  } catch (e) {
+    console.log(e);
+    res.json({ success: false, message: e.message + " Something went wrong" });
+  }
+};
+
 export {
   registerUser,
   loginUser,
@@ -292,4 +331,5 @@ export {
   deleteAppointment,
   paymentStripe,
   verifyStripe,
+  placeOrder
 };

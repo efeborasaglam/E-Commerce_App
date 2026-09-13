@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { AdminContext } from "../../context/AdminContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 const DoctorsList = () => {
   const { doctors, aToken, getAllDoctors, changeAvailability } =
     useContext(AdminContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (aToken) {
@@ -38,6 +40,9 @@ const DoctorsList = () => {
                 />
                 <p>Available</p>
               </div>
+              <button onClick={() => navigate(`/edit-doctor/${item._id}`)}>
+                Edit
+              </button>
             </div>
           </div>
         ))}

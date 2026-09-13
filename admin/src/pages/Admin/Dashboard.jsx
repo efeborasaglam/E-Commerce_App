@@ -4,8 +4,13 @@ import { assets } from "../../assets/assets.js";
 import { AppContext } from "../../context/AppContext.jsx";
 
 const Dashboard = () => {
-  const { aToken, getDashData, cancelAppointment, dashData } =
-    useContext(AdminContext);
+  const {
+    aToken,
+    getDashData,
+    cancelAppointment,
+    completeAppointment,
+    dashData,
+  } = useContext(AdminContext);
 
   const { slotDateFormate } = useContext(AppContext);
 
@@ -107,12 +112,22 @@ const Dashboard = () => {
                     Completed
                   </p>
                 ) : (
-                  <img
-                    onClick={() => cancelAppointment(item._id)}
-                    src={assets.cancel_icon}
-                    alt={"cancel icon"}
-                    className={"w-10 cursor-pointer"}
-                  />
+                  <div className={"flex items-center gap-2"}>
+                    <img
+                      onClick={() => completeAppointment(item._id)}
+                      src={assets.tick_icon}
+                      alt={"complete icon"}
+                      className={"w-10 cursor-pointer"}
+                      title={"Als abgeschlossen markieren"}
+                    />
+                    <img
+                      onClick={() => cancelAppointment(item._id)}
+                      src={assets.cancel_icon}
+                      alt={"cancel icon"}
+                      className={"w-10 cursor-pointer"}
+                      title={"Stornieren"}
+                    />
+                  </div>
                 )}
               </div>
             ))}

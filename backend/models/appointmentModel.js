@@ -8,6 +8,8 @@ const appointmentSchema = new mongoose.Schema({
   userData: { type: Object, required: true },
   docData: { type: Object, required: true },
   amount: { type: Number, required: true },
+  color: { type: String, default: "" },       // <-- Hinzufügen für die Farbe
+  address: { type: Object },
   date: { type: Number, required: true },
   cancel: { type: Boolean, default: false },
   payment: { type: Boolean, default: false },

@@ -7,30 +7,17 @@ import { useNavigate } from "react-router-dom";
 const MyAppointments = () => {
   const { backendUrl, token, getDoctorsData } = useContext(AppContext);
 
-  const { navigate } = useNavigate();
+  const navigate = useNavigate(); // Bugfix: useNavigate() gibt die Funktion direkt zurück, kein { navigate }
 
   const [appointments, setAppointments] = useState([]);
-  const months = [
-    " ",
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
 
-  const slotDateFormate = (slotDate) => {
-    const dateArray = slotDate.split("_");
-    return (
-      dateArray[0] + " " + months[Number(dateArray[1])] + " " + dateArray[2]
-    );
+  const orderDateFormate = (timestamp) => {
+    if (!timestamp) return "-";
+    return new Date(timestamp).toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
   };
 
   const getUserAppointments = async () => {
@@ -79,7 +66,6 @@ const MyAppointments = () => {
       );
       if (data.success) {
         window.location.replace(data.session_url);
-        navigate("/my-appointment");
       } else {
         toast.error(data.message);
       }
@@ -98,7 +84,7 @@ const MyAppointments = () => {
   return (
     <div>
       <p className={"pb-3 mt-12 font-medium text-zinc-700 border-b"}>
-        My Appointments
+        Meine Bestellungen
       </p>
       <div>
         {appointments.map((item, index) => (
@@ -112,7 +98,7 @@ const MyAppointments = () => {
               <img
                 className={"w-32 bg-indigo-50"}
                 src={item.docData.image}
-                alt={"dco"}
+                alt={"produkt"}
               />
             </div>
             <div className={"flex-1 text-sm text-zinc-600"}>
@@ -120,14 +106,47 @@ const MyAppointments = () => {
                 {item.docData.name}
               </p>
               <p>{item.docData.speciality}</p>
-              <p className={"text-zinc-700 font-medium mt-1"}>Address: </p>
-              <p className={"text-xs"}>{item.docData.address?.line1}</p>
-              <p className={"text-xs"}>{item.docData.address?.line2}</p>
+
               <p className={"text-xs mt-1"}>
                 <span className={"text-sm mt-1 text-neutral-700 font-medium"}>
-                  Date & Time:
+                  Menge:
                 </span>{" "}
-                {slotDateFormate(item.slotDate)} | {item.slotTime}
+                {item.quantity ?? "-"}
+                {item.color && (
+                  <>
+                    {" "}
+                    <span
+                      className={"text-sm text-neutral-700 font-medium"}
+                    >
+                      | Farbe:
+                    </span>{" "}
+                    {item.color}
+                  </>
+                )}
+              </p>
+
+              <p className={"text-zinc-700 font-medium mt-1"}>
+                Lieferadresse:
+              </p>
+              {item.address ? (
+                <>
+                  <p className={"text-xs"}>{item.address.name}</p>
+                  <p className={"text-xs"}>{item.address.street}</p>
+                  <p className={"text-xs"}>
+                    {item.address.zip} {item.address.city},{" "}
+                    {item.address.country}
+                  </p>
+                  <p className={"text-xs"}>{item.address.phone}</p>
+                </>
+              ) : (
+                <p className={"text-xs"}>-</p>
+              )}
+
+              <p className={"text-xs mt-1"}>
+                <span className={"text-sm mt-1 text-neutral-700 font-medium"}>
+                  Bestelldatum:
+                </span>{" "}
+                {orderDateFormate(item.date)}
               </p>
             </div>
             <div></div>
