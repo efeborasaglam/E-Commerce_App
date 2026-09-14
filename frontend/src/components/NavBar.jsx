@@ -25,8 +25,8 @@ const NavBar = () => {
         onClick={() => {
           navigate("/");
         }}
-        className={"w-44 cursor-pointer"}
-        src={assets.logo}
+        className={"w-40 cursor-pointer"}
+        src={assets.Efshop}
         alt={"logo"}
       />
 
@@ -40,7 +40,7 @@ const NavBar = () => {
           />
         </NavLink>
         <NavLink to={"/doctors"}>
-          <li className={"py-1"}>ALL DOCTORS</li>
+          <li className={"py-1"}>ALL PRODUCTS</li>
           <hr
             className={
               "border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden"
@@ -92,7 +92,7 @@ const NavBar = () => {
                 </NavLink>
                 <NavLink to={"/my-appointments"}>
                   <p className={"hover:text-black cursor-pointer"}>
-                    MY APPOINTMENTS
+                    MY ORDERS
                   </p>
                 </NavLink>
                 <NavLink to={"/"} onClick={logout}>
@@ -139,7 +139,7 @@ const NavBar = () => {
               <p className={"px-4 py-2 rounded inline-block"}>HOME</p>
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to={"/doctors"}>
-              <p className={"px-4 py-2 rounded inline-block"}> ALL DOCTORS</p>
+              <p className={"px-4 py-2 rounded inline-block"}> ALL PRODUCTS</p>
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to={"/about"}>
               <p className={"px-4 py-2 rounded inline-block"}>ABOUT</p>

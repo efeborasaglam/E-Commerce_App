@@ -12,7 +12,7 @@ const EditDoctor = () => {
 
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState("");
-  const [speciality, setSpeciality] = useState("General physician");
+  const [speciality, setSpeciality] = useState("Supplements");
   const [degree, setDegree] = useState("");
   const [experience, setExperience] = useState("1 Year");
   const [fees, setFees] = useState("");
@@ -215,12 +215,9 @@ const EditDoctor = () => {
                 value={speciality}
                 className={"border rounded px-3 py-2"}
               >
-                <option value={"General physician"}>General physician</option>
-                <option value={"Gynecologist"}>Gynecologist</option>
-                <option value={"Dermatologist"}>Dermatologist</option>
-                <option value={"Pediatricians"}>Pediatricians</option>
-                <option value={"Neurologist"}>Neurologist</option>
-                <option value={"Gastroenterologist"}>Gastroenterologist</option>
+                <option value={"Supplements"}>Supplements</option>
+                <option value={"Gym Products"}>Gym Products</option>
+                <option value={"Rest"}>Rest</option>
               </select>
             </div>
             <div className={"flex-1 flex flex-col gap-1"}>

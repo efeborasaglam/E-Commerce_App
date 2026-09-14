@@ -11,17 +11,10 @@ const Footer = () => {
       >
         {/*    left*/}
         <div>
-          <img className={"mb-5 w-40"} src={assets.logo} alt={"logo"} />
+          <img className={"mb-5 w-40"} src={assets.Efshop} alt={"logo"} />
           <p className={"w-full md:w-2/3 text-gray-600 leading-6"}>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            Wir verkaufen hochwertige Gym- und Fitness-Produkte für dein Training zuhause und im Studio.
+            Alle Artikel wurden vor dem Verkauf sorgfältig getestet und geprüft.
           </p>
         </div>
         {/*    center*/}
@@ -38,8 +31,8 @@ const Footer = () => {
         <div>
           <p className={"text-xl font-medium mb-5"}>Get in Touch</p>
           <ul className={"flex flex-col gap-2 text-gray-600"}>
-            <li>+654641231</li>
-            <li>fener@fener</li>
+            <li>+41 78 730 46 45</li>
+            <li>efebora.saglam@gmail.com</li>
           </ul>
         </div>
       </div>
@@ -47,7 +40,7 @@ const Footer = () => {
         {/*  copy right  */}
         <hr />
         <p className={"py-5 text-sm text-center text-gray-500"}>
-          Copyright 2024@ Prescripto - All Right Reserved.
+          Copyright 2024@ efshop - All Right Reserved.
         </p>
       </div>
     </div>

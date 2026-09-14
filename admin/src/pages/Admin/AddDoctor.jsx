@@ -228,12 +228,9 @@ const AddDoctor = () => {
                 name={""}
                 id={""}
               >
-                <option value={"General physician"}>General physician</option>
-                <option value={"Gynecologist"}>Gynecologist</option>
-                <option value={"Dermatologist"}>Dermatologist</option>
-                <option value={"Pediatricians"}>Pediatricians</option>
-                <option value={"Neurologist"}>Neurologist</option>
-                <option value={"Gastroenterologist"}>Gastroenterologist</option>
+                <option value={"Supplements"}>Supplements</option>
+                <option value={"Gym Products"}>Gym Products</option>
+                <option value={"Rest"}>Rest</option>
               </select>
             </div>
             <div className={"flex-1 flex flex-col gap-1"}>

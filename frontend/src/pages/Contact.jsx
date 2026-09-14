@@ -31,7 +31,7 @@ const Contact = () => {
             Email: efebora.saglam@hotmail.com
           </p>
           <p className={"font-semibold text-lg text-gray-600"}>
-            CAREERS AT PRESCRIPTO
+            CAREERS AT Efshop
           </p>
           <p className={"text-gray-500"}>
             Learn about our teams and job openings

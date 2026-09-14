@@ -17,8 +17,8 @@ const Banner = () => {
             "test-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white"
           }
         >
-          <p>Book Appointment</p>
-          <p className={"mt-4"}>With 100+ Trusted Doctors</p>
+          <p>Buy a Product</p>
+          <p className={"mt-4"}>With Tested Products</p>
         </div>
         <button
           onClick={() => {
@@ -36,7 +36,7 @@ const Banner = () => {
       <div className={"hidden md:block md:w-1/2 lg:w-[370px] relative"}>
         <img
           className={"w-full absolute bottom-0 right-0 max-w-md"}
-          src={assets.appointment_img}
+          src={assets.appointment_img2}
           alt={"niggaaa"}
         />
       </div>

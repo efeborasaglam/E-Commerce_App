@@ -6,11 +6,11 @@ const SpecialityMenu = () => {
   return (
     <div
       className={"flex flex-col items-center gap-4 py-16 text-gray-800"}
-      id={"specality"}
+      id={"speciality"}
     >
-      <h1 className={"text-3xl font-medium"}>Find by Speciality</h1>
+      <h1 className={"text-3xl font-medium"}>Shop by Category</h1>
       <p className={"sm:w-1/3 text-center text-sm"}>
-        Simply browse throur our extensiones niggar baller los grrahhhh
+        Browse our wide range of fitness products
       </p>
       <div
         className={"flex sm:justify-center gap-4 pt-5 w-full overflow-scroll"}
@@ -22,12 +22,15 @@ const SpecialityMenu = () => {
             }
             key={index}
             to={`/doctors/${item.speciality}`}
-            onClick={() => scrollTo(0, 0)}
+            onClick={() => window.scrollTo(0, 0)}
           >
             <img
-              className={"w-16 sm:w-24 mb-2"}
+              className={
+                "w-16 h-16 sm:w-24 sm:h-24 mb-2 p-3 rounded-full " +
+                "bg-[#C8D7EB] object-contain"
+              }
               src={item.image}
-              alt={"image"}
+              alt={item.speciality}
             />
             <p>{item.speciality}</p>
           </Link>

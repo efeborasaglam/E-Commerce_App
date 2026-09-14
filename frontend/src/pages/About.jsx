@@ -22,38 +22,14 @@ const About = () => {
           }
         >
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            We are a Switzerland-based fitness shop dedicated to bringing you high-quality gym and fitness products for every level of training. Our items are carefully sourced and each one is tested before it reaches our shelves, so you can trust what you're getting. From home workout essentials to gear for serious athletes, we've built our range around one simple goal: helping you train better, safer, and smarter.
           </p>
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            Since day one, we've focused on quality over quantity. Every product in our catalog goes through a testing process to make sure it holds up to real use, not just marketing claims. We believe fitness equipment should work as hard as you do, and we're not satisfied until it does.
           </p>
           <b className={"text-gray-800"}>Our Vision</b>
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
-            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-            et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-            accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-            no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            Our vision is to make reliable, tested fitness equipment accessible to everyone in Switzerland, whether you're just starting your fitness journey or training at a competitive level. We want to be the shop people trust when they need gear that actually performs.
           </p>
         </div>
       </div>
@@ -70,10 +46,7 @@ const About = () => {
         >
           <b>EFFICIENCY:</b>
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren,
+            We keep our catalog focused and our process simple, so you can find what you need and get it delivered quickly, without wading through endless options.
           </p>
         </div>
         <div
@@ -83,10 +56,7 @@ const About = () => {
         >
           <b>CONVIENCE:</b>
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren,
+            Shopping with us is straightforward from start to finish, with clear product information and a smooth ordering experience, all from wherever you are in Switzerland.
           </p>
         </div>
         <div
@@ -96,10 +66,7 @@ const About = () => {
         >
           <b>PERSONILATION</b>
           <p>
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-            nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-            erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-            et ea rebum. Stet clita kasd gubergren,
+            We help you find the products that actually fit your training goals and experience level, rather than pushing a one-size-fits-all selection.
           </p>
         </div>
       </div>

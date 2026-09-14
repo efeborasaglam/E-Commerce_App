@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext.jsx";
-import { doctors } from "../assets/assets.js";
 
 const Doctors = () => {
   const { speciality } = useParams();
@@ -28,7 +27,7 @@ const Doctors = () => {
 
   return (
     <div>
-      <p className={"text-gray-600"}>Browse through the doctors specialist.</p>
+      <p className={"text-gray-600"}>Browse through the Products by different categories.</p>
 
       <div className={"flex flex-col sm:flex-row items-start gap-5 mt-5"}>
         <button
@@ -42,63 +41,33 @@ const Doctors = () => {
         >
           <p
             onClick={() =>
-              speciality === "General Physician"
+              speciality === "Supplements"
                 ? navigate("/doctors")
-                : navigate("/doctors/General Physician")
+                : navigate("/doctors/Supplements")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "General Physician" ? "bg-indigo-100 text-black" : ""}`}
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Gym Products" ? "bg-indigo-100 text-black" : ""}`}
           >
-            General Physician
+            Supplements
           </p>
           <p
             onClick={() =>
-              speciality === "Gynecologist"
+              speciality === "Gym Products"
                 ? navigate("/doctors")
-                : navigate("/doctors/Gynecologist")
+                : navigate("/doctors/Gym Products")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Gynecologist" ? "bg-indigo-100 text-black" : ""}`}
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Rest" ? "bg-indigo-100 text-black" : ""}`}
           >
-            Gynecologist
+            Gym Products
           </p>
           <p
             onClick={() =>
-              speciality === "Dermatologist"
+              speciality === "Rest"
                 ? navigate("/doctors")
-                : navigate("/doctors/Dermatologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Dermatologist" ? "bg-indigo-100 text-black" : ""}`}
-          >
-            Dermatologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Pediatricians"
-                ? navigate("/doctors")
-                : navigate("/doctors/Pediatricians")
+                : navigate("/doctors/Rest")
             }
             className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Pediatricians" ? "bg-indigo-100 text-black" : ""}`}
           >
-            Pediatricians
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Neurologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Neurologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Neurologist" ? "bg-indigo-100 text-black" : ""}`}
-          >
-            Neurologist
-          </p>
-          <p
-            onClick={() =>
-              speciality === "Gastroenterologist"
-                ? navigate("/doctors")
-                : navigate("/doctors/Gastroenterologist")
-            }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Gastroenterologist" ? "bg-indigo-100 text-black" : ""}`}
-          >
-            Gastroenterologist
+            Rest
           </p>
         </div>
         <div className={"w-full grid grid-cols-auto gap-4 gap-y-6"}>
