@@ -13,8 +13,8 @@ const Footer = () => {
         <div>
           <img className={"mb-5 w-40"} src={assets.Efshop} alt={"logo"} />
           <p className={"w-full md:w-2/3 text-gray-600 leading-6"}>
-            Wir verkaufen hochwertige Gym- und Fitness-Produkte für dein Training zuhause und im Studio.
-            Alle Artikel wurden vor dem Verkauf sorgfältig getestet und geprüft.
+            We sell high-quality gym and fitness products for your workouts at home and in the gym.
+            All items have been carefully tested and inspected before sale.
           </p>
         </div>
         {/*    center*/}
@@ -40,7 +40,7 @@ const Footer = () => {
         {/*  copy right  */}
         <hr />
         <p className={"py-5 text-sm text-center text-gray-500"}>
-          Copyright 2024@ efshop - All Right Reserved.
+          Copyright 2026@ efshop - All Right Reserved.
         </p>
       </div>
     </div>

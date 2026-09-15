@@ -42,30 +42,30 @@ const Doctors = () => {
           <p
             onClick={() =>
               speciality === "Supplements"
-                ? navigate("/doctors")
-                : navigate("/doctors/Supplements")
+                ? navigate("/products")
+                : navigate("/products/Supplements")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Gym Products" ? "bg-indigo-100 text-black" : ""}`}
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Supplements" ? "bg-indigo-100 text-black" : ""}`}
           >
             Supplements
           </p>
           <p
             onClick={() =>
               speciality === "Gym Products"
-                ? navigate("/doctors")
-                : navigate("/doctors/Gym Products")
+                ? navigate("/products")
+                : navigate("/products/Gym Products")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Rest" ? "bg-indigo-100 text-black" : ""}`}
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Gym Products" ? "bg-indigo-100 text-black" : ""}`}
           >
             Gym Products
           </p>
           <p
             onClick={() =>
               speciality === "Rest"
-                ? navigate("/doctors")
-                : navigate("/doctors/Rest")
+                ? navigate("/products")
+                : navigate("/products/Rest")
             }
-            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Pediatricians" ? "bg-indigo-100 text-black" : ""}`}
+            className={`w-[94vw] sm:w-auto pl-3 py-1.5 pr-16 border border-gray-300 rounded transition-all cursor-pointer ${speciality === "Rest" ? "bg-indigo-100 text-black" : ""}`}
           >
             Rest
           </p>

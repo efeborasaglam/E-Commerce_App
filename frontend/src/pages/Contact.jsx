@@ -23,8 +23,8 @@ const Contact = () => {
         <div className={"flex flex-col justify-center items-start gap-6"}>
           <p className={"font-semibold text-lg text-gray-600"}>OUR OFFICE</p>
           <p className={"text-gray-600"}>
-            9014 St. Gallen <br />
-            Lehnstrasse 73
+            St. Gallen <br />
+            Switzerland
           </p>
           <p className={"text-gray-600"}>
             Tel: 078 730 46 45 <br />

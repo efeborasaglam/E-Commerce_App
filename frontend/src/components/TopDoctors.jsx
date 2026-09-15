@@ -48,7 +48,7 @@ const TopDoctors = () => {
       </div>
       <button
         onClick={() => {
-          navigate("/doctors");
+          navigate("/products");
           scrollTo(0, 0);
         }}
         className={"bg-blue-50 text-gray-600 px-12 py-3 rounded-full mt-10"}

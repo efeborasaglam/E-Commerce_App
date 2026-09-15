@@ -5,6 +5,7 @@ import { assets } from "../assets/assets.js";
 import RelatedDoctors from "../components/RelatedDoctors.jsx";
 import { toast } from "react-toastify";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -162,9 +163,6 @@ const Appointment = () => {
               <p>
                 {docInfo.degree} - {docInfo.speciality}
               </p>
-              <button className={"py-0.5 px-2 border text-xs rounded-full"}>
-                {docInfo.experience}
-              </button>
             </div>
             {/*  Beschreibung  */}
             <div>
@@ -176,9 +174,9 @@ const Appointment = () => {
                 About
                 <img src={assets.info_icon} alt={"info"} />
               </p>
-              <p className={"text-sm text-gray-600 max-w-[700px] mt-1 whitespace-pre-line"}>
-                {docInfo.about}
-              </p>
+              <div className="text-sm text-gray-600 max-w-[700px] mt-1 prose prose-sm prose-headings:font-medium prose-headings:text-gray-800 prose-headings:mt-3 prose-headings:mb-1 prose-p:my-1 max-w-none">
+                <ReactMarkdown>{docInfo.about}</ReactMarkdown>
+              </div>
             </div>
             <p className={"text-gray-500 font-medium mt-5"}>
               Preis :{" "}
@@ -257,28 +255,36 @@ const Appointment = () => {
                 placeholder={"PLZ"}
                 value={address.zip}
                 onChange={handleAddressChange("zip")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
+                className={
+                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
+                }
               />
               <input
                 type={"text"}
                 placeholder={"Ort"}
                 value={address.city}
                 onChange={handleAddressChange("city")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
+                className={
+                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
+                }
               />
               <input
                 type={"text"}
                 placeholder={"Land"}
                 value={address.country}
                 onChange={handleAddressChange("country")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
+                className={
+                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
+                }
               />
               <input
                 type={"tel"}
                 placeholder={"Telefon"}
                 value={address.phone}
                 onChange={handleAddressChange("phone")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
+                className={
+                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
+                }
               />
             </div>
           </div>
