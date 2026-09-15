@@ -1,3 +1,3 @@
-# doc
+# E-Commerce Fitness Shop
 
-customer project
+E-Commerce Shop
