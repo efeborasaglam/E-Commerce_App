@@ -22,9 +22,9 @@ app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
 app.use('/api/user', userRouter)
 
-app.use(express.static(path.join(__dirname, '/frontend/dist')))
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')))
 
-app.get('/{*splat}', (req, res) => {
+app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
 })
 
