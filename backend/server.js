@@ -32,4 +32,4 @@ app.get('/*splat', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
 })
 
-app.listen(port, '0.0.0.0', () => console.log(`Server Started: ${port}`))
+app.listen(port, () => console.log(`Server Started: ${port}`))
