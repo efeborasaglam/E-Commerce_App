@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "node backend/server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
-    "server": "nodemon backend/server.js"
+    "server": "nodemon server.js"
   },
+
   "author": "",
   "license": "ISC",
   "description": "",
