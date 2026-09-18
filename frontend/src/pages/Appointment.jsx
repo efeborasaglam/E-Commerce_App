@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext.jsx";
 import { assets } from "../assets/assets.js";
 import RelatedDoctors from "../components/RelatedDoctors.jsx";
 import { toast } from "react-toastify";
+import ReactMarkdown from "react-markdown";
 import axios from "axios";
 
 const Appointment = () => {
@@ -80,7 +81,7 @@ const Appointment = () => {
       if (data.success) {
         toast.success(data.message);
         getDoctorsData();
-        navigate("/my-orders");
+        navigate("/my-appintments");
       } else {
         toast.error(data.message);
       }
@@ -162,9 +163,6 @@ const Appointment = () => {
               <p>
                 {docInfo.degree} - {docInfo.speciality}
               </p>
-              <button className={"py-0.5 px-2 border text-xs rounded-full"}>
-                {docInfo.experience}
-              </button>
             </div>
             {/*  Beschreibung  */}
             <div>
@@ -176,9 +174,9 @@ const Appointment = () => {
                 About
                 <img src={assets.info_icon} alt={"info"} />
               </p>
-              <p className={"text-sm text-gray-600 max-w-[700px] mt-1 whitespace-pre-line"}>
-                {docInfo.about}
-              </p>
+              <div className="text-sm text-gray-600 max-w-[700px] mt-1 prose prose-sm prose-headings:font-medium prose-headings:text-gray-800 prose-headings:mt-3 prose-headings:mb-1 prose-p:my-1 max-w-none">
+                <ReactMarkdown>{docInfo.about}</ReactMarkdown>
+              </div>
             </div>
             <p className={"text-gray-500 font-medium mt-5"}>
               Preis :{" "}
@@ -193,11 +191,11 @@ const Appointment = () => {
         {/*  Bestellung: Menge + Lieferadresse  */}
 
         <div className={"sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700"}>
-          <p className={"text-lg"}>Bestellung</p>
+          <p className={"text-lg"}>Order</p>
 
           {/* Menge */}
           <div className={"mt-4 max-w-xs"}>
-            <label className={"text-sm text-gray-600"}>Anzahl</label>
+            <label className={"text-sm text-gray-600"}>Amount</label>
             <input
               type={"number"}
               min={1}
@@ -231,7 +229,7 @@ const Appointment = () => {
           {/* Lieferadresse */}
           <div className={"mt-6 max-w-xl"}>
             <p className={"text-sm text-gray-900 font-medium mb-2"}>
-              Lieferadresse
+              delivery address
             </p>
             <div className={"grid grid-cols-1 sm:grid-cols-2 gap-3"}>
               <input
@@ -245,7 +243,7 @@ const Appointment = () => {
               />
               <input
                 type={"text"}
-                placeholder={"Straße und Hausnummer"}
+                placeholder={"Address"}
                 value={address.street}
                 onChange={handleAddressChange("street")}
                 className={
@@ -254,28 +252,28 @@ const Appointment = () => {
               />
               <input
                 type={"text"}
-                placeholder={"PLZ"}
+                placeholder={"Postalcode"}
                 value={address.zip}
                 onChange={handleAddressChange("zip")}
                 className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
               />
               <input
                 type={"text"}
-                placeholder={"Ort"}
+                placeholder={"City"}
                 value={address.city}
                 onChange={handleAddressChange("city")}
                 className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
               />
               <input
                 type={"text"}
-                placeholder={"Land"}
+                placeholder={"Country"}
                 value={address.country}
                 onChange={handleAddressChange("country")}
                 className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
               />
               <input
                 type={"tel"}
-                placeholder={"Telefon"}
+                placeholder={"Telefonnumber"}
                 value={address.phone}
                 onChange={handleAddressChange("phone")}
                 className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
@@ -289,7 +287,7 @@ const Appointment = () => {
               "bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6"
             }
           >
-            Jetzt bestellen
+            Order Now
           </button>
         </div>
         {/*    Listing verwandter Produkte */}
