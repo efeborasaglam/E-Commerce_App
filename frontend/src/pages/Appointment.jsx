@@ -4,13 +4,19 @@ import { AppContext } from "../context/AppContext.jsx";
 import { assets } from "../assets/assets.js";
 import RelatedDoctors from "../components/RelatedDoctors.jsx";
 import { toast } from "react-toastify";
-import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import axios from "axios";
 
 const Appointment = () => {
   const { docId } = useParams();
-  const { doctors, currencySymbol, backendUrl, token, getDoctorsData } =
-    useContext(AppContext);
+  const {
+    doctors,
+    currencySymbol,
+    backendUrl,
+    token,
+    getDoctorsData,
+    addToCart,
+  } = useContext(AppContext);
 
   const navigate = useNavigate();
 
@@ -20,7 +26,6 @@ const Appointment = () => {
   // Menge statt Terminslot
   const [quantity, setQuantity] = useState(1);
 
-  // HIER HAT DER STATE GEFEHLT:
   const [selectedColor, setSelectedColor] = useState("");
 
   // Lieferadresse (nur für diese Bestellung, nicht gespeichert)
@@ -44,6 +49,29 @@ const Appointment = () => {
 
   const isAddressComplete = () => {
     return Object.values(address).every((v) => v.trim() !== "");
+  };
+
+  // In den Warenkorb legen: keine Adresse nötig, die kommt erst beim Checkout
+  const handleAddToCart = () => {
+    if (!token) {
+      toast.warn("Login to add products to cart");
+      return navigate("/login");
+    }
+
+    if (!quantity || quantity < 1) {
+      toast.warn("Bitte eine gültige Anzahl angeben");
+      return;
+    }
+
+    if (docInfo.colors && docInfo.colors.length > 0 && !selectedColor) {
+      toast.warn("Bitte wähle eine Farbe aus");
+      return;
+    }
+
+    const added = addToCart(docId, quantity, selectedColor);
+    if (added) {
+      toast.success("Zum Warenkorb hinzugefügt");
+    }
   };
 
   const placeOrder = async () => {
@@ -81,7 +109,7 @@ const Appointment = () => {
       if (data.success) {
         toast.success(data.message);
         getDoctorsData();
-        navigate("/my-orders");
+        navigate("/my-appointments");
       } else {
         toast.error(data.message);
       }
@@ -174,7 +202,7 @@ const Appointment = () => {
                 About
                 <img src={assets.info_icon} alt={"info"} />
               </p>
-              <div className="text-sm text-gray-600 max-w-[700px] mt-1 prose prose-sm prose-headings:font-medium prose-headings:text-gray-800 prose-headings:mt-3 prose-headings:mb-1 prose-p:my-1 max-w-none">
+              <div className="text-sm text-gray-600 mt-1 prose prose-sm prose-headings:font-medium prose-headings:text-gray-800 prose-headings:mt-3 prose-headings:mb-1 prose-p:my-1 max-w-none">
                 <ReactMarkdown>{docInfo.about}</ReactMarkdown>
               </div>
             </div>
@@ -191,11 +219,11 @@ const Appointment = () => {
         {/*  Bestellung: Menge + Lieferadresse  */}
 
         <div className={"sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700"}>
-          <p className={"text-lg"}>Bestellung</p>
+          <p className={"text-lg"}>Order</p>
 
           {/* Menge */}
           <div className={"mt-4 max-w-xs"}>
-            <label className={"text-sm text-gray-600"}>Anzahl</label>
+            <label className={"text-sm text-gray-600"}>Amount</label>
             <input
               type={"number"}
               min={1}
@@ -226,10 +254,38 @@ const Appointment = () => {
             )}
           </div>
 
-          {/* Lieferadresse */}
+          {/* In den Warenkorb: braucht keine Adresse */}
+          <button
+            onClick={handleAddToCart}
+            className={
+              "flex items-center gap-2 mt-5 text-sm text-stone-600 border px-8 py-3 rounded-full hover:bg-primary hover:text-white transition-all duration-300"
+            }
+          >
+            <svg
+              xmlns={"http://www.w3.org/2000/svg"}
+              className={"w-5 h-5"}
+              fill={"none"}
+              viewBox={"0 0 24 24"}
+              stroke={"currentColor"}
+              strokeWidth={1.7}
+            >
+              <path
+                strokeLinecap={"round"}
+                strokeLinejoin={"round"}
+                d={
+                  "M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M6.106 5.272l1.94 7.28a1.125 1.125 0 0 0 1.087.835h7.98a1.125 1.125 0 0 0 1.09-.848l1.32-5.28a.75.75 0 0 0-.728-.932H6.106Z"
+                }
+              />
+              <circle cx={"9.5"} cy={"19"} r={"1.5"} />
+              <circle cx={"17"} cy={"19"} r={"1.5"} />
+            </svg>
+            In den Warenkorb
+          </button>
+
+          {/* Lieferadresse (nur für den Direktkauf unten) */}
           <div className={"mt-6 max-w-xl"}>
             <p className={"text-sm text-gray-900 font-medium mb-2"}>
-              Lieferadresse
+              delivery address
             </p>
             <div className={"grid grid-cols-1 sm:grid-cols-2 gap-3"}>
               <input
@@ -243,7 +299,7 @@ const Appointment = () => {
               />
               <input
                 type={"text"}
-                placeholder={"Straße und Hausnummer"}
+                placeholder={"Address"}
                 value={address.street}
                 onChange={handleAddressChange("street")}
                 className={
@@ -252,39 +308,31 @@ const Appointment = () => {
               />
               <input
                 type={"text"}
-                placeholder={"PLZ"}
+                placeholder={"Postalcode"}
                 value={address.zip}
                 onChange={handleAddressChange("zip")}
-                className={
-                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
-                }
+                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
               />
               <input
                 type={"text"}
-                placeholder={"Ort"}
+                placeholder={"City"}
                 value={address.city}
                 onChange={handleAddressChange("city")}
-                className={
-                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
-                }
+                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
               />
               <input
                 type={"text"}
-                placeholder={"Land"}
+                placeholder={"Country"}
                 value={address.country}
                 onChange={handleAddressChange("country")}
-                className={
-                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
-                }
+                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
               />
               <input
                 type={"tel"}
-                placeholder={"Telefon"}
+                placeholder={"Telefonnumber"}
                 value={address.phone}
                 onChange={handleAddressChange("phone")}
-                className={
-                  "border border-gray-300 rounded-md px-3 py-2 text-sm"
-                }
+                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
               />
             </div>
           </div>
@@ -295,7 +343,7 @@ const Appointment = () => {
               "bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6"
             }
           >
-            Jetzt bestellen
+            Order Now
           </button>
         </div>
         {/*    Listing verwandter Produkte */}

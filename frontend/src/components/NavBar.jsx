@@ -6,13 +6,15 @@ import { AppContext } from "../context/AppContext.jsx";
 const NavBar = () => {
   const navigate = useNavigate();
 
-  const { token, setToken, userData } = useContext(AppContext);
+  const { token, setToken, userData, cartCount, clearCart } =
+    useContext(AppContext);
 
   const [showMenu, setShowMenu] = useState(false);
 
   const logout = () => {
     setToken(false);
     localStorage.removeItem("token");
+    clearCart();
   };
 
   return (
@@ -64,7 +66,43 @@ const NavBar = () => {
           />
         </NavLink>
       </ul>
-      <div className={"flex item-center gap-4"}>
+      <div className={"flex items-center gap-4"}>
+        {/* Warenkorb */}
+        <button
+          onClick={() => navigate("/cart")}
+          className={"relative p-1"}
+          aria-label={"Warenkorb"}
+          title={"Warenkorb"}
+        >
+          <svg
+            xmlns={"http://www.w3.org/2000/svg"}
+            className={"w-6 h-6 text-gray-700"}
+            fill={"none"}
+            viewBox={"0 0 24 24"}
+            stroke={"currentColor"}
+            strokeWidth={1.7}
+          >
+            <path
+              strokeLinecap={"round"}
+              strokeLinejoin={"round"}
+              d={
+                "M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M6.106 5.272l1.94 7.28a1.125 1.125 0 0 0 1.087.835h7.98a1.125 1.125 0 0 0 1.09-.848l1.32-5.28a.75.75 0 0 0-.728-.932H6.106Z"
+              }
+            />
+            <circle cx={"9.5"} cy={"19"} r={"1.5"} />
+            <circle cx={"17"} cy={"19"} r={"1.5"} />
+          </svg>
+          {cartCount > 0 && (
+            <span
+              className={
+                "absolute -top-1 -right-1 bg-primary text-white text-[10px] leading-none rounded-full w-4 h-4 flex items-center justify-center"
+              }
+            >
+              {cartCount}
+            </span>
+          )}
+        </button>
+
         {token && userData ? (
           <div
             className={"flex items-center gap-2 cursor-pointer group relative"}
@@ -90,10 +128,11 @@ const NavBar = () => {
                     MY PROFILE
                   </p>
                 </NavLink>
+                <NavLink to={"/cart"}>
+                  <p className={"hover:text-black cursor-pointer"}>CART</p>
+                </NavLink>
                 <NavLink to={"/my-appointments"}>
-                  <p className={"hover:text-black cursor-pointer"}>
-                    MY ORDERS
-                  </p>
+                  <p className={"hover:text-black cursor-pointer"}>MY ORDERS</p>
                 </NavLink>
                 <NavLink to={"/"} onClick={logout}>
                   <p className={"hover:text-black cursor-pointer"}>LOGOUT</p>
@@ -140,6 +179,11 @@ const NavBar = () => {
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to={"/products"}>
               <p className={"px-4 py-2 rounded inline-block"}> ALL PRODUCTS</p>
+            </NavLink>
+            <NavLink onClick={() => setShowMenu(false)} to={"/cart"}>
+              <p className={"px-4 py-2 rounded inline-block"}>
+                WARENKORB{cartCount > 0 ? ` (${cartCount})` : ""}
+              </p>
             </NavLink>
             <NavLink onClick={() => setShowMenu(false)} to={"/about"}>
               <p className={"px-4 py-2 rounded inline-block"}>ABOUT</p>

@@ -10,8 +10,9 @@ import MyProfile from "./pages/MyProfile.jsx";
 import Appointment from "./pages/Appointment.jsx";
 import NavBar from "./components/NavBar.jsx";
 import Footer from "./components/Footer.jsx";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Verify from "./pages/Verify.jsx";
+import Cart from "./components/Cart.jsx";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
         <Route path={"/products/:speciality"} element={<Doctors />} />
         <Route path={"/my-profile"} element={<MyProfile />} />
         <Route path={"/appointment/:docId"} element={<Appointment />} />
+        <Route path={"/cart"} element={<Cart />} />
         <Route path={"/verify"} element={<Verify />} />
       </Routes>
       <Footer />
