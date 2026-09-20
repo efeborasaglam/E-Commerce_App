@@ -8,6 +8,7 @@ const Verify = () => {
   const [searchParams] = useSearchParams();
   const success = searchParams.get("success");
   const appointmentId = searchParams.get("appointmentId");
+  const orderGroupId = searchParams.get("orderGroupId"); // NEU: ganze Warenkorb-Bestellung
 
   const { backendUrl, token } = useContext(AppContext);
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const Verify = () => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/user/verifyStripe",
-        { success, appointmentId },
+        { success, appointmentId, orderGroupId },
         { headers: { token } },
       );
 
@@ -33,7 +34,7 @@ const Verify = () => {
   };
 
   useEffect(() => {
-    if (token && appointmentId && success) {
+    if (token && success && (appointmentId || orderGroupId)) {
       verifyStripe();
     }
   }, [token]);

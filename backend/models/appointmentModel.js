@@ -8,8 +8,10 @@ const appointmentSchema = new mongoose.Schema({
   userData: { type: Object, required: true },
   docData: { type: Object, required: true },
   amount: { type: Number, required: true },
-  color: { type: String, default: "" },       // <-- Hinzufügen für die Farbe
+  quantity: { type: Number, default: 1 }, // <-- hat vorher gefehlt, deshalb wurde die Menge nie gespeichert
+  color: { type: String, default: "" },
   address: { type: Object },
+  orderGroupId: { type: String, default: "" }, // <-- alle Artikel einer Warenkorb-Bestellung teilen sich diese ID
   date: { type: Number, required: true },
   cancel: { type: Boolean, default: false },
   payment: { type: Boolean, default: false },
