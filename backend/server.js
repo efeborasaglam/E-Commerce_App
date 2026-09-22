@@ -22,10 +22,10 @@ app.use('/api/admin', adminRouter)
 app.use('/api/doctor', doctorRouter)
 app.use('/api/user', userRouter)
 
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')))
+app.use(express.static(path.join(__dirname, 'admin', 'dist')))
 
 app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'))
+  res.sendFile(path.join(__dirname, 'admin', 'dist', 'index.html'))
 })
 
 app.listen(port, () => console.log(`Server Started: ${port}`))
