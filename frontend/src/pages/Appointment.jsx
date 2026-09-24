@@ -135,31 +135,29 @@ const Appointment = () => {
   return (
     docInfo && (
       <div>
-        {/*   Produkt Details */}
-        <div className={"flex flex-col sm:flex-row gap-4"}>
-          <div className={"flex flex-col gap-3 sm:max-w-72 w-full"}>
-            {/* Hauptbild */}
+        {/* Produkt Details */}
+        <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col gap-3 sm:max-w-72 w-full">
             <img
-              className={"bg-primary w-full sm:max-w-72 rounded-lg"}
+              className="w-full sm:max-w-72 rounded-2xl bg-neutral-100 border border-gray-200"
               src={
                 docInfo.images?.length
                   ? docInfo.images[selectedImage]
                   : docInfo.image
               }
-              alt={"image"}
+              alt="image"
             />
-            {/* Thumbnails */}
             {docInfo.images?.length > 1 && (
-              <div className={"flex gap-2 overflow-x-auto mb-25 sm:mb-0"}>
+              <div className="flex gap-2 overflow-x-auto mb-25 sm:mb-0">
                 {docInfo.images.map((img, index) => (
                   <img
                     key={index}
                     src={img}
                     onClick={() => setSelectedImage(index)}
-                    className={`w-14 h-14 object-cover rounded cursor-pointer border-2 flex-shrink-0 ${
+                    className={`w-14 h-14 object-cover rounded-lg cursor-pointer border-2 flex-shrink-0 transition-all ${
                       selectedImage === index
-                        ? "border-primary"
-                        : "border-transparent opacity-70 hover:opacity-100"
+                        ? "border-[#C6FF00]"
+                        : "border-transparent opacity-60 hover:opacity-100"
                     }`}
                     alt={`thumbnail-${index}`}
                   />
@@ -167,82 +165,65 @@ const Appointment = () => {
               </div>
             )}
           </div>
-          <div
-            className={
-              "flex-1 border border-gray-400 rounded-lg p-8 py-7 bg-white mx-2 sm:mx-0 mt-[-80px] sm:mt-0"
-            }
-          >
-            {/*  Produkt Info: Name, Kategorie  */}
-            <p
-              className={
-                "flex items-center gap-2 text-2xl font-medium text-gray-900"
-              }
-            >
-              {docInfo.name}{" "}
-              <img
-                className={"w-5"}
-                src={assets.verified_icon}
-                alt={"verify"}
-              />
+
+          <div className="flex-1 border border-gray-200 rounded-2xl p-8 py-7 bg-white shadow-sm mx-2 sm:mx-0 mt-[-80px] sm:mt-0">
+            <p className="text-[11px] uppercase tracking-widest text-gray-400">
+              {docInfo.speciality}
             </p>
-            <div
-              className={"flex items-center gap-2 text-sm text-gray-600 mt-1"}
-            >
-              <p>
-                {docInfo.degree} - {docInfo.speciality}
-              </p>
-            </div>
-            {/*  Beschreibung  */}
-            <div>
-              <p
-                className={
-                  "flex items-center gap-1 text-sm font-medium text-gray-900 mt-3"
-                }
+            <p className="flex items-center gap-2 text-3xl font-extrabold text-gray-900 mt-1">
+              {docInfo.name}
+              <img className="w-5" src={assets.verified_icon} alt="verify" />
+            </p>
+            <div className="flex items-center gap-2 text-sm text-gray-500 mt-1">
+              {docInfo.degree && <p>{docInfo.degree}</p>}
+              <span
+                className={`rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
+                  docInfo.available
+                    ? "bg-[#C6FF00] text-black"
+                    : "bg-gray-800 text-gray-300"
+                }`}
               >
+                {docInfo.available ? "In Stock" : "Sold Out"}
+              </span>
+            </div>
+
+            <p className="mt-5 text-3xl font-extrabold text-gray-900">
+              {currencySymbol}
+              {docInfo.fees}
+            </p>
+
+            <div className="mt-5">
+              <p className="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide text-gray-900">
                 About
-                <img src={assets.info_icon} alt={"info"} />
+                <img src={assets.info_icon} alt="info" />
               </p>
-              <div className="text-sm text-gray-600 mt-1 prose prose-sm prose-headings:font-medium prose-headings:text-gray-800 prose-headings:mt-3 prose-headings:mb-1 prose-p:my-1 max-w-none">
+              <div className="text-sm text-gray-600 mt-1 prose prose-sm prose-headings:font-semibold prose-headings:text-gray-800 prose-headings:mt-3 prose-headings:mb-1 prose-p:my-1 max-w-none">
                 <ReactMarkdown>{docInfo.about}</ReactMarkdown>
               </div>
             </div>
-            <p className={"text-gray-500 font-medium mt-5"}>
-              Preis :{" "}
-              <span className={"text-gray-600"}>
-                {currencySymbol}
-                {docInfo.fees}
-              </span>
-            </p>
           </div>
         </div>
 
-        {/*  Bestellung: Menge + Lieferadresse  */}
+        {/* Bestellung: Menge + Lieferadresse */}
+        <div className="sm:ml-72 sm:pl-4 mt-6 font-medium text-gray-700">
+          <p className="text-xl font-extrabold uppercase italic">Order</p>
 
-        <div className={"sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700"}>
-          <p className={"text-lg"}>Order</p>
-
-          {/* Menge */}
-          <div className={"mt-4 max-w-xs"}>
-            <label className={"text-sm text-gray-600"}>Amount</label>
+          <div className="mt-4 max-w-xs">
+            <label className="text-sm text-gray-600">Amount</label>
             <input
-              type={"number"}
+              type="number"
               min={1}
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
-              className={
-                "mt-1 w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
-              }
+              className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#8DB600]"
             />
-            {/* Farbenauswahl */}
             {docInfo.colors && docInfo.colors.length > 0 && (
-              <div className={"mt-4 max-w-xs"}>
-                <label className={"text-sm text-gray-600"}>Farbe</label>
+              <div className="mt-4 max-w-xs">
+                <label className="text-sm text-gray-600">Farbe</label>
                 <select
                   value={selectedColor}
                   onChange={(e) => setSelectedColor(e.target.value)}
-                  className={
-                    "mt-1 w-full border border-gray-300 rounded-md px-3 py-2 text-sm"
-                  }
+                  className="mt-1 w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#8DB600]"
                 >
                   {docInfo.colors.map((color, index) => (
                     <option key={index} value={color}>
@@ -254,99 +235,65 @@ const Appointment = () => {
             )}
           </div>
 
-          {/* In den Warenkorb: braucht keine Adresse */}
+          {/* In den Warenkorb */}
           <button
             onClick={handleAddToCart}
-            className={
-              "flex items-center gap-2 mt-5 text-sm text-stone-600 border px-8 py-3 rounded-full hover:bg-primary hover:text-white transition-all duration-300"
-            }
+            className="flex items-center gap-2 mt-5 text-sm font-semibold uppercase tracking-wide text-neutral-900 border-2 border-neutral-900 px-8 py-3 rounded-full hover:bg-neutral-900 hover:text-[#C6FF00] transition-all duration-300"
           >
             <svg
-              xmlns={"http://www.w3.org/2000/svg"}
-              className={"w-5 h-5"}
-              fill={"none"}
-              viewBox={"0 0 24 24"}
-              stroke={"currentColor"}
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
               strokeWidth={1.7}
             >
               <path
-                strokeLinecap={"round"}
-                strokeLinejoin={"round"}
-                d={
-                  "M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M6.106 5.272l1.94 7.28a1.125 1.125 0 0 0 1.087.835h7.98a1.125 1.125 0 0 0 1.09-.848l1.32-5.28a.75.75 0 0 0-.728-.932H6.106Z"
-                }
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M6.106 5.272l1.94 7.28a1.125 1.125 0 0 0 1.087.835h7.98a1.125 1.125 0 0 0 1.09-.848l1.32-5.28a.75.75 0 0 0-.728-.932H6.106Z"
               />
-              <circle cx={"9.5"} cy={"19"} r={"1.5"} />
-              <circle cx={"17"} cy={"19"} r={"1.5"} />
+              <circle cx="9.5" cy="19" r="1.5" />
+              <circle cx="17" cy="19" r="1.5" />
             </svg>
             In den Warenkorb
           </button>
 
-          {/* Lieferadresse (nur für den Direktkauf unten) */}
-          <div className={"mt-6 max-w-xl"}>
-            <p className={"text-sm text-gray-900 font-medium mb-2"}>
-              delivery address
+          {/* Lieferadresse (Direktkauf) */}
+          <div className="mt-8 max-w-xl rounded-2xl border border-gray-200 p-5">
+            <p className="text-sm text-gray-900 font-semibold uppercase tracking-wide mb-3">
+              Delivery address
             </p>
-            <div className={"grid grid-cols-1 sm:grid-cols-2 gap-3"}>
-              <input
-                type={"text"}
-                placeholder={"Name"}
-                value={address.name}
-                onChange={handleAddressChange("name")}
-                className={
-                  "border border-gray-300 rounded-md px-3 py-2 text-sm sm:col-span-2"
-                }
-              />
-              <input
-                type={"text"}
-                placeholder={"Address"}
-                value={address.street}
-                onChange={handleAddressChange("street")}
-                className={
-                  "border border-gray-300 rounded-md px-3 py-2 text-sm sm:col-span-2"
-                }
-              />
-              <input
-                type={"text"}
-                placeholder={"Postalcode"}
-                value={address.zip}
-                onChange={handleAddressChange("zip")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
-              />
-              <input
-                type={"text"}
-                placeholder={"City"}
-                value={address.city}
-                onChange={handleAddressChange("city")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
-              />
-              <input
-                type={"text"}
-                placeholder={"Country"}
-                value={address.country}
-                onChange={handleAddressChange("country")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
-              />
-              <input
-                type={"tel"}
-                placeholder={"Telefonnumber"}
-                value={address.phone}
-                onChange={handleAddressChange("phone")}
-                className={"border border-gray-300 rounded-md px-3 py-2 text-sm"}
-              />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                ["name", "Name", "text", "sm:col-span-2"],
+                ["street", "Address", "text", "sm:col-span-2"],
+                ["zip", "Postalcode", "text", ""],
+                ["city", "City", "text", ""],
+                ["country", "Country", "text", ""],
+                ["phone", "Telefonnumber", "tel", ""],
+              ].map(([field, placeholder, type, span]) => (
+                <input
+                  key={field}
+                  type={type}
+                  placeholder={placeholder}
+                  value={address[field]}
+                  onChange={handleAddressChange(field)}
+                  className={`border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#8DB600] ${span}`}
+                />
+              ))}
             </div>
           </div>
 
           <button
             onClick={placeOrder}
-            className={
-              "bg-primary text-white text-sm font-light px-14 py-3 rounded-full my-6"
-            }
+            className="bg-[#C6FF00] text-black text-sm font-bold uppercase tracking-wide px-14 py-3.5 rounded-full my-6 hover:scale-105 hover:shadow-[0_0_25px_rgba(198,255,0,0.5)] transition-all duration-300"
           >
             Order Now
           </button>
         </div>
-        {/*    Listing verwandter Produkte */}
+
+        {/* Verwandte Produkte */}
         <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
       </div>
     )

@@ -1,56 +1,53 @@
 import React from "react";
 import { assets } from "../assets/assets.js";
-import Efshop from "../assets/logo_efshop.png";
 
 const Header = () => {
   return (
-    <div
-      className={
-        "flex flex-col md:flex-row flex-wrap bg-primary rounded-lg md:px-8 lg:px-40"
-      }
-    >
-      {/*    LEft side*/}
-      <div
-        className={
-          "md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 m-auto md:py-[10vw]"
-        }
-      >
-        <p
-          className={
-            "text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight md:leading-tight lg:leading-tight"
-          }
-        >
-            <span className={'text-black'}>NEW</span> ENERGY
+    <div className="relative overflow-hidden flex flex-col md:flex-row bg-neutral-950 rounded-2xl md:px-8 lg:px-16">
+      {/* Glow-Effekt */}
+      <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[#C6FF00]/20 blur-3xl" />
+
+      {/* Left side */}
+      <div className="relative md:w-1/2 flex flex-col items-start justify-center gap-5 py-12 px-6 md:px-0 md:py-[8vw]">
+        <span className="rounded-full border border-[#C6FF00]/50 px-4 py-1 text-xs tracking-widest text-[#C6FF00] uppercase">
+          Fitness Shop
+        </span>
+        <p className="text-4xl md:text-5xl lg:text-7xl font-extrabold italic uppercase leading-[0.95] text-white">
+          New <span className="text-[#C6FF00]">Energy</span>
           <br />
-          NEW <span className={'text-black'}>PRODUCTS</span>
+          New <span className="text-[#C6FF00]">Products</span>
         </p>
-        <div
-          className={
-            "flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light"
-          }
-        >
-          <img className={"w-30"} src={assets.group_profiles} alt={"group"} />
-          <p>
-            Simply browse through our extensive list of Fitness Products,
-            <br className={"hidden sm:block"} /> get your item and start TRAINING
-          </p>
+        <p className="max-w-md text-sm md:text-base font-light text-gray-300">
+          Simply browse through our extensive list of Fitness Products, get your
+          item and start TRAINING.
+        </p>
+        <div className="flex items-center gap-4">
+          <a
+            href={"doctors"}
+            className="flex items-center gap-2 rounded-full bg-[#C6FF00] px-8 py-3 text-sm font-bold uppercase tracking-wide text-black hover:scale-105 hover:shadow-[0_0_25px_rgba(198,255,0,0.5)] transition-all duration-300"
+          >
+            Shop Now
+            <img src={assets.arrow_icon} className="w-3" alt="arrow" />
+          </a>
+          <a
+            href="#speciality"
+            className="text-sm text-white underline underline-offset-4 hover:text-[#C6FF00] transition-colors"
+          >
+            Categories
+          </a>
         </div>
-        <a
-          className={
-            "flex items-center gap-2 bg-white px-8 py-3 rounded-full text-gray-600 text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300"
-          }
-          href={"doctors"}
-        >
-          Look Into{" "}
-          <img src={assets.arrow_icon} className={"w-3"} alt={"arrow"} />
-        </a>
+        <div className="flex items-center gap-3 pt-2">
+          <img className="w-24" src={assets.group_profiles} alt="group" />
+          <p className="text-xs text-gray-400">Join our training community</p>
+        </div>
       </div>
-      {/*    Right side*/}
-      <div className={"md:w-1/2 relative"}>
+
+      {/* Right side */}
+      <div className="relative md:w-1/2">
         <img
-          className={"w-full md:absolute bottom-0 h-auto rounded-lg"}
+          className="w-full md:absolute bottom-0 h-auto rounded-2xl"
           src={assets.header_image}
-          alt={"header"}
+          alt="header"
         />
       </div>
     </div>
