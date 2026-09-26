@@ -25,8 +25,8 @@ const App = () => {
         <Route path={"/contact"} element={<Contact />} />
         <Route path={"/login"} element={<Login />} />
         <Route path={"/my-appointments"} element={<MyAppointments />} />
-        <Route path={"/products"} element={<Doctors />} />
-        <Route path={"/products/:speciality"} element={<Doctors />} />
+        <Route path={"/doctors"} element={<Doctors />} />
+        <Route path={"/doctors/:speciality"} element={<Doctors />} />
         <Route path={"/my-profile"} element={<MyProfile />} />
         <Route path={"/appointment/:docId"} element={<Appointment />} />
         <Route path={"/cart"} element={<Cart />} />

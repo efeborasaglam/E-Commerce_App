@@ -320,19 +320,10 @@ const Cart = () => {
                 disabled={loading}
                 onClick={orderAndPay}
                 className={
-                  "bg-primary text-white text-sm font-light px-14 py-3 rounded-full disabled:opacity-60"
+                  "bg-white text-black border-black border-1 hover:bg-accent hover:text-white text-sm font-light px-14 py-3 rounded-full disabled:opacity-60"
                 }
               >
-                Bestellen und jetzt bezahlen
-              </button>
-              <button
-                disabled={loading}
-                onClick={orderPayLater}
-                className={
-                  "text-sm text-stone-500 px-14 py-3 border rounded-full hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-60"
-                }
-              >
-                Bestellen und später bezahlen
+                Order and Pay
               </button>
             </div>
           </div>

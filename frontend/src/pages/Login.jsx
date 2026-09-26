@@ -55,66 +55,62 @@ const Login = () => {
   }, [token]);
 
   return (
-    <form
-      onSubmit={onSubmitHandler}
-      className={"min-h-[80vh] flex items-center"}
-    >
-      <div
-        className={
-          "flex flex-col gap-3 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border rounded-xl text-zinc-600 text-sm shadow-lg"
-        }
-      >
-        <p className={"text-2xl font-semibold"}>
+    <form onSubmit={onSubmitHandler} className="min-h-[80vh] flex items-center">
+      <div className="flex flex-col gap-4 m-auto items-start p-8 min-w-[340px] sm:min-w-96 border border-gray-200 rounded-2xl text-zinc-600 text-sm shadow-xl">
+        <p className="text-3xl font-extrabold uppercase italic text-neutral-900">
           {state === "Sign Up" ? "Create Account" : "Login"}
         </p>
         <p>
-          Please {state === "sign up" ? "Create Account" : "login"} to book
-          appointment
+          Please {state === "Sign Up" ? "create an account" : "login"} to start
+          shopping
         </p>
+
         {state === "Sign Up" && (
-          <div className={"w-full"}>
-            <p>Full Name</p>
+          <div className="w-full">
+            <p className="font-medium">Full Name</p>
             <input
-              type={"text"}
-              className={"border border-zinc-300 rounded w-full p-2 mt-1"}
+              type="text"
+              className="border border-zinc-300 rounded-lg w-full p-2.5 mt-1 focus:outline-none focus:border-[#8DB600]"
               onChange={(e) => setName(e.target.value)}
               value={name}
-              required={true}
+              required
             />
           </div>
         )}
 
-        <div className={"w-full"}>
-          <p>Email</p>
+        <div className="w-full">
+          <p className="font-medium">Email</p>
           <input
-            type={"email"}
+            type="email"
             onChange={(e) => setEmail(e.target.value)}
-            className={"border border-zinc-300 rounded w-full p-2 mt-1"}
+            className="border border-zinc-300 rounded-lg w-full p-2.5 mt-1 focus:outline-none focus:border-[#8DB600]"
             value={email}
-            required={true}
+            required
           />
         </div>
-        <div className={"w-full"}>
-          <p>Password</p>
+        <div className="w-full">
+          <p className="font-medium">Password</p>
           <input
-            type={"password"}
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
-            className={"border border-zinc-300 rounded w-full p-2 mt-1"}
+            className="border border-zinc-300 rounded-lg w-full p-2.5 mt-1 focus:outline-none focus:border-[#8DB600]"
             value={password}
-            required={true}
+            required
           />
         </div>
+
         <button
-          type={"submit"}
-          className={"bg-primary text-white w-full py-2 rounded-md text-base"}
+          type="submit"
+          className="w-full rounded-full bg-neutral-950 py-3 text-sm font-bold uppercase tracking-wide text-[#C6FF00] hover:bg-[#C6FF00] hover:text-black transition-all duration-300"
         >
           {state === "Sign Up" ? "Create Account" : "Login"}
         </button>
+
         {state === "Sign Up" ? (
-          <p className={""}>
+          <p>
             Already have an account?{" "}
             <span
-              className={"text-primary underline cursor-pointer"}
+              className="text-[#8DB600] font-semibold underline cursor-pointer"
               onClick={() => setState("Login")}
             >
               Login here
@@ -122,9 +118,9 @@ const Login = () => {
           </p>
         ) : (
           <p>
-            Create an new account?{" "}
+            Create a new account?{" "}
             <span
-              className={"text-primary underline cursor-pointer"}
+              className="text-[#8DB600] font-semibold underline cursor-pointer"
               onClick={() => setState("Sign Up")}
             >
               Click here
