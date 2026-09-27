@@ -21,8 +21,7 @@ const Contact = () => {
             Our Office
           </p>
           <p className="text-gray-600">
-            9014 St. Gallen <br />
-            Lehnstrasse 73
+            Switzerland St. Gallen <br />
           </p>
           <p className="text-gray-600">
             Tel: 078 730 46 45 <br />

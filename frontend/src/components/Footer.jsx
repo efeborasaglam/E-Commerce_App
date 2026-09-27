@@ -58,7 +58,7 @@ const Footer = () => {
           </p>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li>+41 78 730 46 45</li>
-            <li>efebora.saglam@gmail.com</li>
+            <li>nadelwerk4@gmail.com</li>
           </ul>
         </div>
       </div>
