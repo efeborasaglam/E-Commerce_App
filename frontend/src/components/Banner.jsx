@@ -7,7 +7,7 @@ const Banner = () => {
   return (
     <div
       className={
-        "flex bg-primary rounded-lg px-6 sm:px-10 md:px-14 lg:px-12 my-20 md:mx-10"
+        "flex bg-[#C6FF00] rounded-lg px-6 sm:px-10 md:px-14 lg:px-12 my-20 md:mx-10"
       }
     >
       {/*  Left  */}
